@@ -1,0 +1,16 @@
+{
+	"name": "recetas",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"tailwind": "npx tailwindcss build ./resources/css/app.css -o ./public/css/app.css"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"tailwindcss": "^1.8.4"
+	}
+}

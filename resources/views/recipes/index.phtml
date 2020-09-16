@@ -1,0 +1,53 @@
+<?php view('layouts.header') ?>
+<meta property="og:title" content="Mis recetas - <?= APP_NAME ?>" />
+<meta property="og:description" content="Listado de todas mis recetas" />
+<title>Mis recetas - <?= APP_NAME ?></title>
+<meta name="description" content="Listado de todas mis recetas">
+<?php view('layouts.body') ?>
+
+<div class="flex items-center justify-between mb-3">
+    <h2 class="font-bold text-xl md:text-3xl">Mis recetas</h2>
+    <!-- <a href="<?= route('recipes.create') ?>" class="rounded-full">Agregar</a> -->
+    <a class="hidden md:flex bg-orange-900 hover:bg-orange-800 rounded-full px-4 py-2 text-white" href="<?= route('recipes.create') ?>">
+        <svg class="w-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+        <p class="text-sm">Agregar receta</p>
+    </a>
+</div>
+<a class="flex fixed md:hidden bg-orange-900 rounded-full px-4 py-3 text-white" href="<?= route('recipes.create') ?>" style="bottom: 2rem; right: 1.5rem;">
+    <svg class="w-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+    </svg>
+    <p class="text-sm">Agregar receta</p>
+</a>
+
+<?php if (hasMessage('message')) { ?>
+    <div id="alert" class="w-full mx-auto flex justify-center items-center text-sm py-2 px-2 mb-4 bg-white rounded text-white <?= getMessage('type') ?>">
+        <div class="font-normal text-xs  max-w-full flex-initial">
+            <?= getMessage('message') ?>
+        </div>
+        <div id="btnCloseAlert" class="flex flex-auto flex-row-reverse cursor-pointer">
+            <svg class="w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </div>
+    </div>
+<?php } ?>
+
+<?php component('recipes-list', $recipes, 'pages.show') ?>
+
+
+
+
+<script>
+    if (document.getElementById('btnCloseAlert')) {
+        let btnCloseAlert = document.getElementById('btnCloseAlert');
+        let alert = document.getElementById('alert');
+        btnCloseAlert.addEventListener('click', () => {
+            alert.classList.add('hidden');
+        })
+    }
+</script>
+
+<?php view('layouts.footer') ?>
