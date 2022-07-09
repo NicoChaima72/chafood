@@ -1,0 +1,36 @@
+<?php view('layouts.header') ?>
+<meta property="og:title" content="Inicio - <?= APP_NAME ?>" />
+<meta property="og:description" content="Conoce y comparte recetas de todo el mundo, puedes tambien crear tus propias recetas" />
+<title>Inicio - <?= APP_NAME ?></title>
+<meta name="description" content="Conoce y comparte recetas de todo el mundo, puedes tambien crear tus propias recetas">
+<?php view('layouts.body') ?>
+
+
+
+<div class="flex items-center justify-between mb-3">
+    <h2 class="font-semibold text-lg md:text-2xl">Tipos de recetas</h2>
+    <a href="<?= route('types.index') ?>" class="text-sm">Ver todas</a>
+</div>
+<div class="flex flex-no-wrap mb-5 pb-2 space-x-2 overflow-x-auto relative">
+    <?php foreach ($types as $type) { ?>
+        <a href="<?= route('types.show', $type->url) ?>" class="w-2/5 md:w-1/5 flex-none mb-2">
+            <div class="relative w-full">
+                <div class="imagen-rectangular">
+                    <img loading="lazy" class="rounded-lg aspect-video" src="<?= $type->image ?>" alt="">
+                </div>
+                <div class="absolute inset-0 bg-black opacity-50 w-full h-full rounded-lg"></div>
+                <div class="absolute inset-0 flex justify-center items-center">
+                    <h3 class="text-white uppercase font-medium md:font-semibold lg:text-xl p-2"><?= $type->name ?></h3>
+                </div>
+            </div>
+        </a>
+    <?php } ?>
+</div>
+
+<div class="flex items-center justify-between mb-3">
+    <h2 class="font-semibold text-lg md:text-2xl">Últimas recetas</h2>
+</div>
+
+<?php component('recipes-list', $recipes, 'pages.show') ?>
+
+<?php view('layouts.footer') ?>

@@ -1,0 +1,125 @@
+<?php view('layouts.header') ?>
+<meta name="description" content="<?= $recipe->title . ' - ' . $recipe->description ?>">>
+<title><?= $recipe->title ?> - <?= APP_NAME ?></title>
+<?php view('layouts.body') ?>
+
+<div class="flex fixed bg-orange-900 rounded-full p-2 z-50 justify-center" style="bottom: 2rem; right: 1.5rem;">
+    <div x-data="{ dropdownOpen: false }" class="relative">
+        <button @click="dropdownOpen = !dropdownOpen" class="text-white relative z-10 block rounded-md p-2 focus:outline-none">
+            <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+        </button>
+
+        <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
+
+        <div x-show="dropdownOpen" class="absolute mt-1 py-2 w-48 bg-white rounded-md shadow-2xl z-20 border" style="bottom: 3.5rem; right: 0;">
+            <a href="<?= route('recipes.edit', $recipe->url) ?>" class="block px-4 py-2 text-sm capitalize hover:bg-gray-200">
+                Editar
+            </a>
+            <hr>
+            <button class="block w-full text-left px-4 py-2 text-sm text-red-700 capitalize hover:bg-gray-200" onclick="(confirm('Se eliminará esta receta') ? document.getElementById('form-destroy').submit() : null)">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<div class="">
+    <div class="md:shadow-lg">
+        <div class="block md:grid grid-cols-3 gap-x-8 md:p-8 md:border md:rounded-lg">
+            <div class="hidden md:block col-span-2">
+                <h1 class="text-3xl font-semibold"><?= $recipe->title ?></h1>
+                <div class="flex justify-start space-x-12 text-sm my-2 px-4">
+                    <div class="flex flex-col justify-center items-center">
+                        <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <p><?= $recipe->persons ?> per.</p>
+                    </div>
+                    <div class="flex flex-col justify-center items-center">
+                        <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p><?= $recipe->duration ?> min.</p>
+                    </div>
+                    <?php if (!empty($recipe->type())) { ?>
+                        <a href="<?= route('types.show', $recipe->type()->url) ?>" class="flex flex-col justify-center items-center">
+                            <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
+                            </svg>
+                            <p><?= $recipe->type()->name ?></p>
+                        </a>
+                    <?php } ?>
+                </div>
+                <hr>
+                <div class="my-4">
+                    <p class="leading-none"><span class="font-semibold">Autor: </span><?= $recipe->user()->name ?></p>
+                </div>
+
+                <div class="mt-4 mb-4 overflow-y-auto">
+                    <p class="text-lg font-semibold">Descripcion</p>
+                    <p class="text-sm"><?= $recipe->description ?></p>
+                </div>
+
+            </div>
+            <div>
+                <div class="imagen-cuadrada">
+                    <img loading="lazy" src="<?= asset($recipe->photo()->url) ?>" class="rounded-t-lg">
+                </div>
+            </div>
+        </div>
+        <div class="relative bg-white p-3 px-4 rounded-lg mx-1 shadow-md md:shadow-none" style="top: -4rem;">
+            <div class="block md:hidden">
+                <h1 class="text-xl font-semibold"><?= $recipe->title ?></h1>
+                <div class="flex justify-around text-sm my-2">
+                    <div class="flex flex-col justify-center items-center">
+                        <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <p><?= $recipe->persons ?> per.</p>
+                    </div>
+                    <div class="flex flex-col justify-center items-center">
+                        <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p><?= $recipe->duration ?> min.</p>
+                    </div>
+                    <?php if (!empty($recipe->type())) { ?>
+                        <a href="<?= route('types.show', $recipe->type()->url) ?>" class="flex flex-col justify-center items-center">
+                            <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
+                            </svg>
+                            <p><?= $recipe->type()->name ?></p>
+                        </a>
+                    <?php } ?>
+                </div>
+                <hr>
+                <div class="flex items-end justify-center my-2">
+                    <svg class="w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <p class="leading-none ml-1"><?= $recipe->user()->name ?></p>
+                </div>
+                <div class="mt-4 mb-4">
+                    <p class="text-lg font-semibold">Descripcion</p>
+                    <p class="text-sm"><?= $recipe->description ?></p>
+                </div>
+            </div>
+            <div class="mt-4 mb-4">
+                <p class="text-lg font-semibold">Ingredientes</p>
+                <div class="p-4 bg-gray-300 rounded-lg">
+                    <p><?= $recipe->ingredients ?></p>
+                </div>
+            </div>
+
+            <div class="mt-4 mb-4">
+                <p class="text-lg font-semibold">Pasos</p>
+                <p><?= $recipe->steps ?></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="form-destroy" action="<?= route('recipes.destroy', $recipe->url) ?>" method="POST" class="d-none">
+</form>
+
+<?php view('layouts.footer') ?>

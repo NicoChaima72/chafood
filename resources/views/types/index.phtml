@@ -1,0 +1,31 @@
+<?php view('layouts.header') ?>
+<meta property="og:title" content="Tipos de recetas - <?= APP_NAME ?>" />
+<meta property="og:description" content="Listado de tipos de comidas" />
+<title>Tipos de recetas - <?= APP_NAME ?></title>
+<meta name="description" content="Listado de tipos de comidas">
+<?php view('layouts.body') ?>
+
+<div class="flex items-center justify-between mb-3">
+    <h2 class="font-bold text-xl md:text-3xl">Tipos de recetas</h2>
+</div>
+
+
+<div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-3 gap-y-4">
+    <?php foreach ($types as $type) { ?>
+        <a href="<?= route('types.show', $type->url) ?>" class="">
+            <div class="relative w-full">
+                <div class="imagen-rectangular">
+                    <img loading="lazy" class="rounded-lg" src="<?= $type->image ?>" alt="">
+                </div>
+                <div class="absolute inset-0 bg-black opacity-50 w-full h-full rounded-lg"></div>
+                <div class="absolute inset-0 flex justify-center items-center">
+                    <h3 class="text-white uppercase font-medium md:font-semibold lg:text-xl p-2"><?= $type->name ?></h3>
+                </div>
+            </div>
+            <p class="text-sm leading-4 my-1"><?= $type->description ?></p>
+            <div class="flex items-end space-x-1">
+                <p class="leading-none font-semibold text-sm">Recetas: <span class="text-sm font-normal"><?= count($type->recipes()) ?></span></p>
+            </div>
+        </a>
+    <?php } ?>
+</div>

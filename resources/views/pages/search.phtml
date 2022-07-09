@@ -1,0 +1,15 @@
+<?php view('layouts.header') ?>
+<meta property="og:title" content="Buscar - <?= APP_NAME ?>" />
+<meta property="og:description" content="Resultados para la busqueda para <?= $search ?>" />
+
+<title>Buscar - <?= APP_NAME ?></title>
+<meta name="description" content="Resultados para la busqueda para <?= $search ?>">
+<?php view('layouts.body') ?>
+
+<div class="mb-3">
+    <h2 class="font-bold text-xl md:text-3xl">Buscando: <span class="font-normal"><?= $search ?></span></h2>
+</div>
+
+<?php component('recipes-list', $recipes, 'pages.show') ?>
+
+<?php view('layouts.footer') ?>

@@ -1,0 +1,79 @@
+<?php view('layouts.header') ?>
+<meta property="og:title" content="Registrarse - <?= APP_NAME ?>" />
+<meta property="og:description" content="Registrate para compartir tus propias recetas" />
+<title>Registrarse - <?= APP_NAME ?></title>
+<meta name="description" content="Registrate para compartir tus propias recetas">
+<?php view('layouts.body') ?>
+
+
+<?php if (hasMessage('message')) { ?>
+    <div id="alert" class="w-full md:w-1/2 lg:w-5/12 mx-auto flex justify-center items-center text-sm py-2 px-2 mb-4 bg-white rounded text-white <?= getMessage('type') ?>">
+        <div class="font-normal text-xs  max-w-full flex-initial">
+            <?= getMessage('message') ?>
+        </div>
+        <div id="btnCloseAlert" class="flex flex-auto flex-row-reverse cursor-pointer">
+            <svg class="w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </div>
+    </div>
+<?php } ?>
+
+<div class="w-full md:w-1/2 lg:w-5/12 bg-white rounded-lg lg:rounded-l-none mx-auto">
+    <form action="<?= route('auth.register') ?>" method="POST" class="mb-4 bg-white rounded">
+        <h3 class="text-2xl md:text-3xl mb-3">Registrate y sube tus recetas!</h3>
+        <div class="mb-3">
+            <label class="block mb-2 text-sm font-medium text-gray-700" for="name">
+                Nombre
+            </label>
+            <input name="name" value="<?= old('name') ?>" class="w-full px-3 py-2 mb-1 text-sm leading-tight text-gray-700 border <?php if (has_error('name')) echo 'border-red-500' ?> rounded shadow appearance-none focus:outline-none" id="name" type="text" placeholder="Juanito Perez" required />
+            <?php if (has_error('name')) { ?> <p class="text-xs text-red-500"><?= error('name') ?></p> <?php } ?>
+        </div>
+        <div class="mb-3">
+            <label class="block mb-2 text-sm font-medium text-gray-700" for="email">
+                Email
+            </label>
+            <input name="email" value="<?= old('email') ?>" class="w-full px-3 py-2 mb-1 text-sm leading-tight text-gray-700 border <?php if (has_error('email')) echo 'border-red-500' ?> rounded shadow appearance-none focus:outline-none" id="email" type="email" placeholder="example@example.com" required />
+            <?php if (has_error('email')) { ?> <p class="text-xs text-red-500"><?= error('email') ?></p> <?php } ?>
+        </div>
+        <div class="mb-3">
+            <label class="block mb-2 text-sm font-medium text-gray-700" for="password">
+                Contraseña
+            </label>
+            <input name="password" class="w-full px-3 p-2 mb-1 text-sm leading-tight text-gray-700 border <?php if (has_error('password')) echo 'border-red-500' ?> rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" required />
+            <?php if (has_error('password')) { ?> <p class="text-xs text-red-500"><?= error('password') ?></p> <?php } ?>
+        </div>
+        <div class="mb-3">
+            <label class="block mb-2 text-sm font-medium text-gray-700" for="verify-password">
+                Verificar contraseña
+            </label>
+            <input name="verify-password" class="w-full px-3 p-2 mb-1 text-sm leading-tight text-gray-700 border <?php if (has_error('verify-password')) echo 'border-red-500' ?> rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="verify-password" type="password" placeholder="******************" required />
+            <?php if (has_error('verify-password')) { ?> <p class="text-xs text-red-500"><?= error('verify-password') ?></p> <?php } ?>
+        </div>
+
+        <div class="mb-6 text-center">
+            <button class="w-full bg-orange-900 hover:bg-orange-800 text-white py-2 px-4 rounded text-sm" type="submit">
+                Registrarme
+            </button>
+        </div>
+        <hr class="mb-6 border-t" />
+        <div class="text-center text-sm">
+            <a class="text-orange-900 align-baseline hover:text-orange-800" href="<?= route('auth.show-login') ?>">
+                Ya tengo cuenta.
+            </a>
+        </div>
+    </form>
+</div>
+
+<script>
+    if (document.getElementById('btnCloseAlert')) {
+        let btnCloseAlert = document.getElementById('btnCloseAlert');
+        let alert = document.getElementById('alert');
+        btnCloseAlert.addEventListener('click', () => {
+            alert.classList.add('hidden');
+        })
+    }
+</script>
+
+
+<?php view('layouts.footer') ?>

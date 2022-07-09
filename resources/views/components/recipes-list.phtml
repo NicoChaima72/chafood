@@ -1,0 +1,62 @@
+<?php if (empty($data)) { ?>
+    <div class="flex justify-center flex-col space-y-2">
+        <p class="lead mt-3 text-center">No se han encontrado recetas</p>
+        <a href="<?= route('pages.index') ?>" class="bg-orange-900 mx-auto hover:bg-orange-800 text-white py-2 px-4 rounded text-sm">
+            Ir a inicio
+        </a>
+    </div>
+<?php } else { ?>
+    <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-4 gap-x-3 gap-y-4 md:gap-x-4 md:gap-y-5 mb-12 md:mb-24">
+        <?php foreach ($data as $recipe) { ?>
+            <div class="max-w-sm rounded overflow-hidden shadow-sm">
+                <a href="<?= route($route_path, $recipe->url) ?>">
+                    <div class="">
+                        <img loading="lazy" class="w-full" src="<?= substr($recipe->photo()->url, 0, 4) == 'img/' ? asset($recipe->photo()->url) : $recipe->photo()->url ?>" alt="<?= $recipe->title ?>" style="aspect-ratio: 10/9">
+                    </div>
+                    <div class="px-3 py-1 pb-4 border border-t-0">
+                        <div class="font-bold text-sm md:text-lg mt-2 mb-1 leading-3 md:leading-none"><?= $recipe->title ?></div>
+                        <div class="flex items-center">
+                            <svg class="w-3 md:w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                            </svg>
+                            <p class="leading-none text-sm md:text-md font-light md:font-normal ml-1"><?= $recipe->duration ?> min.</p>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-3 md:w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                            </svg>
+                            <p class="leading-none text-sm md:text-md font-light md:font-normal ml-1"><?= $recipe->persons ?> pers.</p>
+                        </div>
+                        <?php if (!empty($recipe->type())) { ?>
+                            <div class="flex items-center">
+                                <svg class="w-3 md:w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M6 3a1 1 0 011-1h.01a1 1 0 010 2H7a1 1 0 01-1-1zm2 3a1 1 0 00-2 0v1a2 2 0 00-2 2v1a2 2 0 00-2 2v.683a3.7 3.7 0 011.055.485 1.704 1.704 0 001.89 0 3.704 3.704 0 014.11 0 1.704 1.704 0 001.89 0 3.704 3.704 0 014.11 0 1.704 1.704 0 001.89 0A3.7 3.7 0 0118 12.683V12a2 2 0 00-2-2V9a2 2 0 00-2-2V6a1 1 0 10-2 0v1h-1V6a1 1 0 10-2 0v1H8V6zm10 8.868a3.704 3.704 0 01-4.055-.036 1.704 1.704 0 00-1.89 0 3.704 3.704 0 01-4.11 0 1.704 1.704 0 00-1.89 0A3.704 3.704 0 012 14.868V17a1 1 0 001 1h14a1 1 0 001-1v-2.132zM9 3a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm3 0a1 1 0 011-1h.01a1 1 0 110 2H13a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                </svg>
+                                <p class="leading-none text-sm md:text-md font-light md:font-normal ml-1"><?= $recipe->type()->name ?></p>
+                            </div>
+                        <?php } ?>
+                       
+                    </div>
+                </a>
+            </div>
+            <!-- <div class="card mb-3">
+                <img src="<?= asset($recipe->photo()->url) ?>" class="card-img-top">
+                <div class="card-body">
+                    <a href="<?= route($route_path, $recipe->url) ?>">
+                        <h5 class="card-title"><?= $recipe->title ?></h5>
+                    </a>
+                    <small class="card-text"><?= $recipe->ingredients ?></small>
+                    <small class="card-text">Autor: <?= $recipe->user()->name ?></small>
+                    <p class="card-text"><?= $recipe->description ?></p>
+                    <small class="card-text">Cantidad personas: <?= $recipe->persons ?></small>
+                    <?php if (!empty($recipe->type())) { ?>
+                        <a href="<?= route('types.show', $recipe->type()->url) ?>">
+                            <small class="card-text d-block">Tipo: <?= $recipe->type()->name ?></small>
+                        </a>
+                    <?php } ?>
+                    <p class="card-text"><small class="text-muted"><?= $recipe->created_at ?></small></p>
+                </div>
+            </div> -->
+        <?php } ?>
+    </div>
+<?php } ?>

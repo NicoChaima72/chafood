@@ -1,0 +1,15 @@
+<?php view('layouts.header') ?>
+<meta property="og:title" content="<?= $type->name ?> - <?= APP_NAME ?>" />
+<meta property="og:description" content="<?= $type->name ?> - <?= APP_NAME ?>" />
+<title><?= $type->name ?> - <?= APP_NAME ?></title>
+<meta name="description" content="Tipo: " . <?= $type->name ?> - <?= $type->description ?>>
+<?php view('layouts.body') ?>
+
+<div class="mb-3">
+    <h2 class="font-bold text-xl md:text-3xl">Tipo de receta: <span class="font-normal"><?= $type->name ?></span></h2>
+    <h3 class="font-semibold">Cantidad de recetas: <span class="font-normal"><?= count($type->recipes()) ?></span></h3>
+</div>
+
+<?php component('recipes-list', $type->recipes(), 'pages.show') ?>
+
+<?php view('layouts.footer') ?>
