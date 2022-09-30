@@ -77,13 +77,13 @@
         </div>
         <div class="my-3 md:my-0 col-span-3 hidden" id="containerImagePreview">
             <div class="imagen-cuadrada rounded-lg">
-                <img loading="lazy" id="imagePreview" class="rounded-lg" style="aspect-ratio: 10/9">
+                <img loading="lazy" id="imagePreview" class="rounded-lg" style="aspect-ratio: 4/3">
             </div>
         </div>
         <?php if (has_error('image')) { ?> <p class="text-xs text-red-500"><?= error('image') ?></p> <?php } ?>
     </div>
 
-    <button class="w-full bg-orange-900 hover:bg-orange-800 text-white py-2 px-4 rounded text-sm" type="submit">
+    <button class="w-full bg-orange-900 hover:bg-orange-800 text-white py-2 px-4 rounded text-sm" type="submit" id="btnSubmit">
         Agregar
     </button>
 </form>
@@ -92,6 +92,7 @@
 <script>
     document.getElementById('form').addEventListener('submit', function(e) {
         let imageUrlBox = document.getElementById('txtImage');
+        document.getElementById('btnSubmit').disabled = true;
         
         if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(imageUrlBox.value))) {
             e.preventDefault();
@@ -99,6 +100,7 @@
             setTimeout(() => {
                 imageUrlBox.style.borderColor="red";
                 setTimeout(() => {
+                    document.getElementById('btnSubmit').disabled = true;
                     imageUrlBox.style.borderColor="transparent";
                 }, 2000);
             }, 100);

@@ -86,7 +86,7 @@ let btnOptions = document.getElementById('btnOptions');
             </div>
             <div>
                 <div class="imagen-cuadrada rounded-lg shadow-lg">
-                    <img loading="lazy" src="<?= substr($recipe->photo()->url, 0, 4) == 'img/' ? asset($recipe->photo()->url) : $recipe->photo()->url ?>" class="rounded-lg" style="aspect-ratio: 10/9">
+                    <img loading="lazy" src="<?= substr($recipe->photo()->url, 0, 4) == 'img/' ? asset($recipe->photo()->url) : $recipe->photo()->url ?>" class="rounded-lg" style="aspect-ratio: 4/3">
                 </div>
             </div>
         </div>

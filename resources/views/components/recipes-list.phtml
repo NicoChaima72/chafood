@@ -13,7 +13,7 @@
             <div class="max-w-sm rounded overflow-hidden shadow-sm">
                 <a href="<?= route($route_path, $recipe->url) ?>">
                     <div class="">
-                        <img loading="lazy" class="w-full" src="<?= substr($recipe->photo()->url, 0, 4) == 'img/' ? asset($recipe->photo()->url) : $recipe->photo()->url ?>" alt="<?= $recipe->title ?>" style="aspect-ratio: 10/9">
+                        <img loading="lazy" class="w-full" src="<?= substr($recipe->photo()->url, 0, 4) == 'img/' ? asset($recipe->photo()->url) : $recipe->photo()->url ?>" alt="<?= $recipe->title ?>" style="aspect-ratio: 4/3">
                     </div>
                     <div class="px-3 py-1 pb-4 border border-t-0">
                         <div class="font-bold text-sm md:text-lg mt-2 mb-1 leading-3 md:leading-none"><?= $recipe->title ?></div>

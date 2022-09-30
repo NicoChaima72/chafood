@@ -78,13 +78,13 @@
         </div>
         <div class="my-3 md:my-0 col-span-3" id="containerImagePreview">
             <div class="imagen-cuadrada rounded-lg">
-                <img loading="lazy" id="imagePreview" src="<?= substr($recipe->photo()->url, 0, 4) == 'img/' ? asset($recipe->photo()->url) : $recipe->photo()->url ?>" class="rounded-lg imagen-cuadrada" style="aspect-ratio: 10/9">
+                <img loading="lazy" id="imagePreview" src="<?= substr($recipe->photo()->url, 0, 4) == 'img/' ? asset($recipe->photo()->url) : $recipe->photo()->url ?>" class="rounded-lg imagen-cuadrada" style="aspect-ratio: 4/3">
             </div>
         </div>
         <?php if (has_error('image')) { ?> <p class="text-xs text-red-500"><?= error('image') ?></p> <?php } ?>
     </div>
 
-    <button class="w-full bg-orange-900 hover:bg-orange-800 text-white py-2 px-4 rounded text-sm" type="submit">
+    <button class="w-full bg-orange-900 hover:bg-orange-800 text-white py-2 px-4 rounded text-sm" type="submit" id="btnSubmit">
         Actualizar
     </button>
 </form>
@@ -95,12 +95,14 @@
 <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 <script>
     document.getElementById('form').addEventListener('submit', function(e) {
+        document.getElementById('btnSubmit').disabled = true;
         let imageUrlBox = document.getElementById('txtImage');
         
         if (!(/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(imageUrlBox.value))) {
             e.preventDefault();
             alert('La url proporcionada no es una imagen');
             setTimeout(() => {
+                document.getElementById('btnSubmit').disabled = false;
                 imageUrlBox.style.borderColor="red";
                 setTimeout(() => {
                     imageUrlBox.style.borderColor="transparent";
