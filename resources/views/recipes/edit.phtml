@@ -10,16 +10,6 @@
 </div>
 
 
-
-
-<?php
-print_r($recipe->photo()->url)
-?>
-
-
-
-
-
 <form id="form" class="mb-4" action="<?= route('recipes.update', $recipe->url) ?>" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
         <label class="block mb-2 text-sm font-medium text-gray-700" for="title">
@@ -88,7 +78,7 @@ print_r($recipe->photo()->url)
         </div>
         <div class="my-3 md:my-0 col-span-3" id="containerImagePreview">
             <div class="imagen-cuadrada rounded-lg">
-                <img loading="lazy" id="imagePreview" src="<?= substr($recipe->photo()->url, 0, 4) == 'img/' ? asset($recipe->photo()->url) : $recipe->photo()->url ?>" class="rounded-lg">
+                <img loading="lazy" id="imagePreview" src="<?= substr($recipe->photo()->url, 0, 4) == 'img/' ? asset($recipe->photo()->url) : $recipe->photo()->url ?>" class="rounded-lg imagen-cuadrada" style="aspect-ratio: 10/9">
             </div>
         </div>
         <?php if (has_error('image')) { ?> <p class="text-xs text-red-500"><?= error('image') ?></p> <?php } ?>

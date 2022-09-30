@@ -67,7 +67,7 @@ class RecipesController extends Controller
 
         $photo_saved = Photo::create($photo_data);
 
-        return print_r($photo_saved);
+        // return print_r($photo_saved);
 
         // $photo_saved = $this->insertImage($request['image'], "img/recipes", $result, 5120);
         // Subimos la imagen al servidor y la registramos en la bd
@@ -126,10 +126,16 @@ class RecipesController extends Controller
         
         $recipe->update($data);
 
-
-        if (has_file($request['image']) == 1) {
-            $this->updateImage($recipe, $request['image'], "img/recipes");
+        if (@$request['image'] != $recipe->photo()->url) {
+            $this->deleteImage($recipe);
+            $photo_data = ['recipe_id' => $recipe->id, 'url' => @$request['image']];
+            $photo_saved = Photo::create($photo_data);
         }
+        
+        
+        // if (has_file($request['image']) == 1) {
+        //     $this->updateImage($recipe, $request['image'], "img/recipes");
+        // }
 
         return redirect(route('recipes.index'), [
             'message' => 'Se ha actualizado la receta',

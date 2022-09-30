@@ -40,7 +40,7 @@
     </div>
     <div class="mb-3">
         <label class="block mb-2 text-sm font-medium text-gray-700" for="duration">
-            Duración
+            Duración (minutos)
         </label>
         <input name="duration" value="<?= old('duration') ?>" class="w-full px-3 py-2 mb-1 text-sm leading-tight text-gray-700 border <?php if (has_error('duration')) echo 'border-red-500' ?> rounded shadow appearance-none focus:outline-none" id="duration" type="number" required min="0" autocomplete="off" />
         <?php if (has_error('duration')) { ?> <p class="text-xs text-red-500"><?= error('duration') ?></p> <?php } ?>

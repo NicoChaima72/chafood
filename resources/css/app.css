@@ -57,3 +57,6 @@ body {
 .texto-ingredientes li {
   margin: 0.5rem 0;
 }
+.ingredients ul {
+  background-color: green!important;
+}

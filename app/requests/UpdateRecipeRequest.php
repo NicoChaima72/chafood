@@ -11,7 +11,8 @@ class UpdateRecipeRequest extends Request
             'steps' => "required",
             'duration' => "required",
             'persons' => "required",
-            'image' => "file_mime:jpg,png,jpeg||file_max:1024"
+            // 'image' => "file_mime:jpg,png,jpeg||file_max:1024"
+            'image' => "required"
         ];
 
 
