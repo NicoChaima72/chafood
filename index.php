@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Hola mundo</h1>
-</body>
-</html>
+<?php
+
+// cargamos el autoload para autocargar los archivos que necesitemos
+require_once './autoload.php';
+$autoload = new Autoload();
+
+// en este archivo registraremos las rutas que utilizará la aplicacion
+require_once('./routes/web.php');
+
+
+// eliminamos los mensajes enviados por session despues de recargar la pagina
+Session::deleteMessages();
+// eliminamos el valor de los inputs enviados por session despues de recargar la pagina
+Session::deleteOlds();
+// eliminamos los errores enviados por session despues de recargar la pagina
+Session::deleteErrors();
