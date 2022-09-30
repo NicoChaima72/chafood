@@ -3,15 +3,6 @@
 <title><?= $recipe->title ?> - <?= APP_NAME ?></title>
 <?php view('layouts.body') ?>
 
-<style>
-    .container-text ul {
-        list-style: circle;
-    }
-    .container-text ol {
-        list-style: decimal;
-    }
-</style>
-
 <div class="flex fixed bg-orange-900 rounded-full p-2 z-50 justify-center" style="bottom: 2rem; right: 1.5rem;">
     <div x-data="{ dropdownOpen: false }" class="relative">
         <button @click="dropdownOpen = !dropdownOpen" class="text-white relative z-10 block rounded-md p-2 focus:outline-none">
