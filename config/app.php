@@ -7,9 +7,9 @@ define("APP_HOST", "https://nch-recetas.herokuapp.com");
 define("APP_URI", "");
 define("APP_DOCUMENT_ROOT", "");
 
-define("DB_HOST", 'us-cdbr-east-06.cleardb.net');
-define("DB_DATABASE", 'heroku_9126d6c96c209a4');
-define("DB_USERNAME", 'b6ea299ec8e7d0');
-define("DB_PASSWORD", 'd809cf56');
+define("DB_HOST", 'localhost');
+define("DB_DATABASE", 'DATABASE_NAME');
+define("DB_USERNAME", 'USER_NAME');
+define("DB_PASSWORD", 'PASSWORD_USER');
 
 
